@@ -170,8 +170,6 @@ End
 		Sub Pressed(key as string, Meta as boolean, Shift as Boolean, Alt as Boolean, Control as Boolean)
 		  Dim sa() As String
 		  
-		  sa.Add key
-		  
 		  If meta Then
 		    sa.Add "CMD/CTRL"
 		  End If
@@ -188,7 +186,9 @@ End
 		    sa.Add "CTRL"
 		  End If
 		  
-		  label2.text = string.FromArray(sa, "  ")
+		  sa.Add key.Uppercase
+		  
+		  label2.Text = String.FromArray(sa, "-")
 		End Sub
 	#tag EndEvent
 #tag EndEvents
