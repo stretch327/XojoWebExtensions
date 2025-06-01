@@ -161,6 +161,9 @@ End
 		  
 		  // enter (keypad Enter & keyboard Return)
 		  KeyInterceptor1.Add("enter", False) // doing this may interfere with xojo's tab engine
+		  
+		  // Something special - CMD/CTRL-SHIFT-Y
+		  KeyInterceptor1.Add("Y", True, True)
 		End Sub
 	#tag EndEvent
 	#tag Event
