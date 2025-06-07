@@ -52,7 +52,7 @@ Inherits WebSDKUIControl
 
 	#tag Event
 		Function JavaScriptClassName() As String
-		  return JSClassName
+		  return kJSClassName
 		End Function
 	#tag EndEvent
 
@@ -94,9 +94,9 @@ Inherits WebSDKUIControl
 		  // but globally without session info so we're not creating this
 		  // over and over
 		  If SharedJSClassFile = Nil Then
-		    Dim domain As String = JSClassName.NthField(".",1)
-		    Dim className As String = JSClassName.NthField(".",2)
-		    Dim code As String = kJSCode.ReplaceAll("websdkdomainname", domain).ReplaceAll("websdkcontrolname", className)
+		    Dim domain As String = kJSClassName.NthField(".",1)
+		    Dim className As String = kJSClassName.NthField(".",2)
+		    Dim code As String = kJSCode.ReplaceAll("domain_name", domain).ReplaceAll("control_name", className)
 		    SharedJSClassFile = New WebFile
 		    SharedJSClassFile.MIMEType = "text/javascript"
 		    SharedJSClassFile.Session = Nil
@@ -145,12 +145,6 @@ Inherits WebSDKUIControl
 	#tag DelegateDeclaration, Flags = &h0
 		Delegate Sub EventDelegate(obj as KeyInterceptor, key as string, Meta as boolean, Shift as Boolean, Alt as Boolean, Control as Boolean)
 	#tag EndDelegateDeclaration
-
-	#tag Method, Flags = &h21
-		Private Function JSClassName() As String
-		  return "sos.keyinterceptor"
-		End Function
-	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Remove(key as string, meta as boolean, shift as Boolean = False, option as boolean = False, control as Boolean = false)
@@ -204,7 +198,10 @@ Inherits WebSDKUIControl
 	#tag EndProperty
 
 
-	#tag Constant, Name = kJSCode, Type = String, Dynamic = False, Default = \"var websdkdomainname;\n(function (websdkdomainname) {\n\tclass websdkcontrolname extends XojoWeb.XojoVisualControl {\n\t\tconstructor(target\x2C events) {\n\t\t\tsuper(target\x2C events);\n\n\t\t\tthis.mKeys \x3D [];\n\t\t\tthis.mActive \x3D false;\n\t\t\tthis.eventHandlerSet \x3D false;\n\t\t\tthis.mReady \x3D false; // used to indicate that the control is not yet ready for use\n\t\t\tthis.setupEventHandler();\n\t\t}\n\n\t\tcallback(ev) {\n\t\t\tif (this.mActive && this.eventHandlerSet) {\n\t\t\t\tlet i \x3D 0;\n\t\t\t\tfor (i \x3D 0; i < this.mKeys.length; i++) {\n\t\t\t\t\tlet key \x3D this.mKeys[i];\n\t\t\t\t\tif (ev.key.toLowerCase() \x3D\x3D key.key.toLowerCase() && (ev.metaKey \x3D\x3D key.meta) && (ev.shiftKey \x3D\x3D key.shift) && (ev.altKey \x3D\x3D key.alt) && (ev.ctrlKey \x3D\x3D key.control)) {\n\t\t\t\t\t\tev.stopPropagation();\n\t\t\t\t\t\tev.preventDefault();\n\t\t\t\t\t\t// send the key info to the server\n\t\t\t\t\t\tlet datum \x3D { key: key };\n\t\t\t\t\t\tthis.triggerServerEvent(\"pressed\"\x2C datum\x2C true);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tsetupEventHandler() {\n\t\t\tthis.eventHandlerSet \x3D true;\n\t\t\tlet that \x3D this;\n\t\t\tdocument.addEventListener(\'keydown\'\x2C function (ev) {\n\t\t\t\tthat.callback(ev);\n\t\t\t});\n\t\t}\n\n\t\tupdateControl(data) {\n\t\t\tsuper.updateControl(data);\n\t\t\tlet js \x3D $.parseJSON(data);\n\t\t\tthis.mKeys \x3D js.keys;\n\t\t\tthis.mActive \x3D js.active;\n\t\t\tthis.mReady \x3D true;\n\t\t}\n\n\t}\n\twebsdkdomainname.websdkcontrolname \x3D websdkcontrolname;\n})(websdkdomainname || (websdkdomainname \x3D {}));\n", Scope = Private
+	#tag Constant, Name = kJSClassName, Type = String, Dynamic = False, Default = \"example.keyinterceptor", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kJSCode, Type = String, Dynamic = False, Default = \"var domain_name;\n(function (domain_name) {\n\tclass control_name extends XojoWeb.XojoVisualControl {\n\t\tconstructor(target\x2C events) {\n\t\t\tsuper(target\x2C events);\n\n\t\t\tthis.mKeys \x3D [];\n\t\t\tthis.mActive \x3D false;\n\t\t\tthis.eventHandlerSet \x3D false;\n\t\t\tthis.mReady \x3D false; // used to indicate that the control is not yet ready for use\n\t\t\tthis.setupEventHandler();\n\t\t}\n\n\t\tcallback(ev) {\n\t\t\tif (this.mActive && this.eventHandlerSet) {\n\t\t\t\tlet i \x3D 0;\n\t\t\t\tfor (i \x3D 0; i < this.mKeys.length; i++) {\n\t\t\t\t\tlet key \x3D this.mKeys[i];\n\t\t\t\t\tif (ev.key.toLowerCase() \x3D\x3D key.key.toLowerCase() && (ev.metaKey \x3D\x3D key.meta) && (ev.shiftKey \x3D\x3D key.shift) && (ev.altKey \x3D\x3D key.alt) && (ev.ctrlKey \x3D\x3D key.control)) {\n\t\t\t\t\t\tev.stopPropagation();\n\t\t\t\t\t\tev.preventDefault();\n\t\t\t\t\t\t// send the key info to the server\n\t\t\t\t\t\tlet datum \x3D { key: key };\n\t\t\t\t\t\tthis.triggerServerEvent(\"pressed\"\x2C datum\x2C true);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tsetupEventHandler() {\n\t\t\tthis.eventHandlerSet \x3D true;\n\t\t\tlet that \x3D this;\n\t\t\tdocument.addEventListener(\'keydown\'\x2C function (ev) {\n\t\t\t\tthat.callback(ev);\n\t\t\t});\n\t\t}\n\n\t\tupdateControl(data) {\n\t\t\tsuper.updateControl(data);\n\t\t\tlet js \x3D $.parseJSON(data);\n\t\t\tthis.mKeys \x3D js.keys;\n\t\t\tthis.mActive \x3D js.active;\n\t\t\tthis.mReady \x3D true;\n\t\t}\n\n\t}\n\tdomain_name. control_name \x3D control_name;\n})(domain_name || (domain_name \x3D {}));\n", Scope = Private
 	#tag EndConstant
 
 
