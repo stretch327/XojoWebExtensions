@@ -15,3 +15,11 @@ Usage:
 3. Call **Add** to add keys that you want to capture. Meta is Command on MacOS and Control on Windows/Linux.
 4. Call **Remove** with the same parameters to remove the capture.
 5. Call **RemoveAll** to remote all key captures.
+
+### Sidebar
+
+A sidebar control in the style presented in the bootstrap docs. This control is dark-mode aware and can be set to Light, Dark or Auto.
+
+1. Drop the control on the page
+2. In the Opening event, add the items you want using the Add method. Icon names are from [icons.getbootstrap.com]().
+3. When the user clicks an item in the list, the RowClicked event will fire with the index of the item that was clicked. REMEMBER: Separators also have indexes, so you may want to use the CaptionAt method to check the item that was actually selected.
