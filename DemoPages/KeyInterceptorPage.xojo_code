@@ -1,5 +1,5 @@
 #tag WebPage
-Begin WebPage WebPage1
+Begin WebPage KeyInterceptorPage
    AllowTabOrderWrap=   True
    Compatibility   =   ""
    ControlCount    =   0
@@ -131,6 +131,13 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  session.SaveState("keyinterceptor")
+		End Sub
+	#tag EndEvent
+
+
 #tag EndWindowCode
 
 #tag Events KeyInterceptor1
