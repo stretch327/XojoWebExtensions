@@ -9,6 +9,7 @@ BuildSteps=Build Automation;Build Automation.xojo_code;&h000000005A8BBFFF;&h0000
 Folder=Controls;Controls;&h0000000079D537FF;&h0000000000000000;false
 Class=KeyInterceptor;Controls/KeyInterceptor.xojo_code;&h000000000004EFFF;&h0000000079D537FF;false
 DefaultWindow=WebPage1
+Class=Sidebar;Controls/Sidebar.xojo_code;&h0000000026A0EFFF;&h0000000079D537FF;false
 MajorVersion=1
 MinorVersion=0
 SubVersion=0
