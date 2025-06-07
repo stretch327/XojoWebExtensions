@@ -297,6 +297,7 @@ End
 		  Me.add("Products", "grid")
 		  Me.add("Customers", "person-circle")
 		  
+		  me.SelectedRowIndex = 0
 		End Sub
 	#tag EndEvent
 	#tag Event
