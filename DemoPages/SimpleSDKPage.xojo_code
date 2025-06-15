@@ -1,5 +1,5 @@
 #tag WebPage
-Begin WebPage IndexPage
+Begin WebPage SimpleSDKPage
    AllowTabOrderWrap=   True
    Compatibility   =   ""
    ControlCount    =   0
@@ -33,128 +33,70 @@ Begin WebPage IndexPage
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebButton KeyInterceptorButton
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "Key Interceptor"
+   Begin SimpleTable SimpleTable1
+      ColumnCount     =   0
       ControlID       =   ""
       CSSClasses      =   ""
-      Default         =   False
       Enabled         =   True
-      Height          =   38
+      Height          =   314
+      HoverableRows   =   False
       Index           =   -2147483648
       Indicator       =   0
+      LastAddedRowIndex=   0
+      LastRowIndex    =   0
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockHorizontal  =   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       LockVertical    =   False
-      Outlined        =   False
       PanelIndex      =   0
       Scope           =   0
+      SelectedRowIndex=   0
+      StripedColumns  =   False
+      StripedRows     =   False
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   158
+      Top             =   66
       Visible         =   True
-      Width           =   161
+      Width           =   560
       _mPanelIndex    =   -1
    End
-   Begin WebButton SidebarButton
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "Sidebar"
-      ControlID       =   ""
-      CSSClasses      =   ""
-      Default         =   False
-      Enabled         =   True
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   0
-      Left            =   189
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Outlined        =   False
-      PanelIndex      =   0
-      Scope           =   0
-      TabIndex        =   1
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   158
-      Visible         =   True
-      Width           =   161
-      _mPanelIndex    =   -1
-   End
-   Begin WebButton SimpleSDKButton
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "SimpleSDK"
-      ControlID       =   ""
-      CSSClasses      =   ""
-      Default         =   False
-      Enabled         =   True
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   0
-      Left            =   358
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Outlined        =   False
-      PanelIndex      =   0
-      Scope           =   0
-      TabIndex        =   2
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   158
-      Visible         =   True
-      Width           =   161
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Label1
+   Begin WebLabel PressedActionLabel
       Bold            =   False
       ControlID       =   ""
       CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
-      Height          =   130
+      Height          =   38
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       Italic          =   False
       Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
+      LockLeft        =   False
+      LockRight       =   True
       LockTop         =   True
       LockVertical    =   False
-      Multiline       =   True
+      Multiline       =   False
       PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   3
+      Scope           =   0
+      TabIndex        =   2
       TabStop         =   True
-      Text            =   "Demos\n\nClick the buttons to view each demo page. To return to this page, either Refresh or press the Back button on your browser."
-      TextAlignment   =   0
+      Text            =   "Pressed Action"
+      TextAlignment   =   3
       TextColor       =   &c000000FF
       Tooltip         =   ""
       Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   391
+      Width           =   560
       _mPanelIndex    =   -1
    End
 End
@@ -163,31 +105,57 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  session.SaveState("index")
+		  session.SaveState("Simplesdk")
 		End Sub
 	#tag EndEvent
 
 
 #tag EndWindowCode
 
-#tag Events KeyInterceptorButton
+#tag Events SimpleTable1
 	#tag Event
-		Sub Pressed()
-		  KeyInterceptorPage.Show
+		Sub Opening()
+		  Me.ColumnCount = 4
+		  Me.HeaderAt(0) = "#"
+		  Me.HeaderAt(1) = "First"
+		  Me.HeaderAt(2) = "Last"
+		  Me.HeaderAt(3) = "Handle"
+		  
+		  Me.AddRow("1", "Mark", "Otto", "@mdo")
+		  Me.AddRow("2", "Jacob", "Thornton", "@jot")
+		  Me.AddRow("3", "John", "Doe", "@socialbot")
+		  
+		  Me.RowAt(2).Indicator = WebUIControl.Indicators.Warning
+		  
+		  Me.SelectedRowIndex = 1
+		  
+		  Me.HoverableRows = True
+		  
+		  // make the row action buttons
+		  
+		  Dim auditButton As New DOM.ButtonElement("Audit")
+		  auditButton.Indicator = WebUIControl.Indicators.Info
+		  Me.Actions.Add auditButton
+		  
+		  Dim deleteButton As New DOM.ButtonElement("Delete")
+		  deleteButton.Indicator = WebUIControl.Indicators.Danger
+		  Me.Actions.Add deleteButton
 		End Sub
 	#tag EndEvent
-#tag EndEvents
-#tag Events SidebarButton
 	#tag Event
-		Sub Pressed()
-		  SidebarPage.Show
+		Sub Action(caption as string, rowIndex as integer)
+		  PressedActionLabel.Text = "The button """ + caption + """ was pressed on row " + rowIndex.ToString("0")
+		  
 		End Sub
 	#tag EndEvent
-#tag EndEvents
-#tag Events SimpleSDKButton
 	#tag Event
-		Sub Pressed()
-		  SimpleSDKPage.Show
+		Sub SelectionChanged()
+		  PressedActionLabel.Text = "Row " + me.SelectedRowIndex.ToString + " clicked"
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub CheckPressed(name as string, value as integer)
+		  PressedActionLabel.Text = "the checkbox on row " + value.ToString + " was pressed."
 		End Sub
 	#tag EndEvent
 #tag EndEvents

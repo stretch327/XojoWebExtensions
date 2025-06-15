@@ -21,6 +21,9 @@ Inherits WebSession
 		  Case "index"
 		    IndexPage.Show
 		    
+		  Case "Simplesdk"
+		    SimpleSDKPage.Show
+		    
 		  Case Else
 		    // OOPS
 		    
