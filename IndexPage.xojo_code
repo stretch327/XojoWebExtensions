@@ -33,7 +33,7 @@ Begin WebPage IndexPage
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebButton Button1
+   Begin WebButton KeyInterceptorButton
       AllowAutoDisable=   False
       Cancel          =   False
       Caption         =   "Key Interceptor"
@@ -58,12 +58,12 @@ Begin WebPage IndexPage
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   158
       Visible         =   True
       Width           =   161
       _mPanelIndex    =   -1
    End
-   Begin WebButton Button2
+   Begin WebButton SidebarButton
       AllowAutoDisable=   False
       Cancel          =   False
       Caption         =   "Sidebar"
@@ -74,7 +74,7 @@ Begin WebPage IndexPage
       Height          =   38
       Index           =   -2147483648
       Indicator       =   0
-      Left            =   20
+      Left            =   189
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -88,9 +88,43 @@ Begin WebPage IndexPage
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   66
+      Top             =   158
       Visible         =   True
       Width           =   161
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Label1
+      Bold            =   False
+      ControlID       =   ""
+      CSSClasses      =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   130
+      Index           =   -2147483648
+      Indicator       =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   True
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   3
+      TabStop         =   True
+      Text            =   "Demos\n\nClick the buttons to view each demo page. To return to this page, either Refresh or press the Back button on your browser."
+      TextAlignment   =   0
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   20
+      Underline       =   False
+      Visible         =   True
+      Width           =   391
       _mPanelIndex    =   -1
    End
 End
@@ -106,14 +140,14 @@ End
 
 #tag EndWindowCode
 
-#tag Events Button1
+#tag Events KeyInterceptorButton
 	#tag Event
 		Sub Pressed()
 		  KeyInterceptorPage.Show
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button2
+#tag Events SidebarButton
 	#tag Event
 		Sub Pressed()
 		  SidebarPage.Show
